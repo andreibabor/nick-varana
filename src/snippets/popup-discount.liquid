@@ -1,40 +1,38 @@
 <div class="main-popup js-close-popup">
-  
+
   <div class="overlay">
     <div class="popup-inner">
       <div class="popup-banner">
-        <h2>10% OFF your first purchase</h2>
-      </div>
-
-      <div class="form-box">
-        <form action="https://lucafaloni.us8.list-manage.com/subscribe/post-json?u=b571400f352a1e3357a0262be&amp;id=bb9f27e3b3&c=?" 
-            method="get" name="mc-embedded-subscribe-form" class="validate newsletter-form-popup">
-
-            <p>Sign up to our newsletter to get your Welcome Code</p>
-          
-          	<div class="ui">
-              <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"  placeholder="Your email" required>
-
-              <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  <input type="text" name="b_b571400f352a1e3357a0262be_bb9f27e3b3" tabindex="-1" value="">
-              </div>
-
-              <input type="submit" value="Send" name="subscribe" id="mc-embedded-subscribe" class="button submit mc-button">
-            </div>
-
-            <div id="subscribe-result" class="responses">
-            </div>
-          
-          	<p class="close-text close-popup"><a href="#">No Thanks</a></p>
-
-            <p class="privacy">By signing up you agree to our <a href="/pages/privacy-cookie-policy">privacy policy</a></p>
-        </form>
-      </div>
-
-      <div class="close-icon close-popup">
-        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve"><g><g id="close"><polygon points="357,35.7 321.3,0 178.5,142.8 35.7,0 0,35.7 142.8,178.5 0,321.3 35.7,357 178.5,214.2 321.3,357 357,321.3 214.2,178.5 "/></g></g></svg>
-      </div>
+       <img src="{{ 'popup-img.jpg' | asset_url }}" alt="popup-img">
      </div>
+
+     <div class="form-box">
+      <form action="#" 
+      method="get" name="mc-embedded-subscribe-form" class="validate newsletter-form-popup">
+
+      <h3 class="text-center">JOURNEY WITH US</h3>
+      <p>Take a moment to join and explore ancient crafts and heavenly clothing.</p>
+
+      <div class="ui">
+        <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"  placeholder="Email Address" required>
+
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+          <input type="text" name="b_b571400f352a1e3357a0262be_bb9f27e3b3" tabindex="-1" value="">
+        </div>
+
+        <input type="submit" value="Send" name="subscribe" id="mc-embedded-subscribe" class="button submit mc-button">
+      </div>
+
+      <div id="subscribe-result" class="responses">
+      </div>
+
+    </form>
   </div>
-  
+
+  <div class="close-icon close-popup">
+    <span>X</span>
+  </div>
+</div>
+</div>
+
 </div>

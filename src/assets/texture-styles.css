@@ -30,6 +30,21 @@
   unicode-range: U+0020-00FE;
 }
 
+@font-face {
+font-family: 'SurveyorDisplay';
+  src: url('Surveyor-Display.eot');
+  src: url('Surveyor-Display.eot?#iefix') format('embedded-opentype'),
+  url('Surveyor-Display.woff2') format('woff2'),
+  url('Surveyor-Display.woff') format('woff'),
+  url('Surveyor-Display.ttf') format('truetype'),
+  url('SurveyorDisplay-Light-Pro.otf') format('opentype'),
+  url('Surveyor-Display.svg#Surveyor-Display') format('svg');
+  font-weight: normal;
+  font-style: normal;
+    font-stretch: normal;
+  unicode-range: U+0020-00FE;
+}
+
 body,
 p,
 body.template-product ul.tabs > li .tab__descriptions p {
