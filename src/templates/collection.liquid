@@ -1,0 +1,62 @@
+{% comment %}
+  The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+  {% endcomment %}
+
+  {% if collection.description contains "template-2" %}
+  {% section 'collection-template2' %}
+  {% elsif collection.description contains "template-3" %}
+  {% section 'collection-template3' %}
+  {% else %}
+  {% section 'collection-template' %}
+  {% endif %}
+
+  {% comment %}<div class="plp-explore">
+  	<div id="shopify-section-collection-slider" class="shopify-section index-section border-bottom collection-slider-index"><div class="page-width collection-slider" data-aos="fade-up">
+
+     <div class="section-header text-center">
+      <h2>EXPLORE FEATURED COLLECTIONS</h2>
+    </div>
+
+    <div class="collection-grid collection-slider-content">
+    	<ul class="collection-list-slider owl-carousel owl-theme">
+        {% assign featured = collection.metafields["global"]["featuredCollections"] | split: "," %}
+
+        {% if featured != blank %}
+        {% assign featured_collection = featured | where: "true" %}
+
+        {% assign compaire = '' %}
+        {% for featured in featured_collection %}
+        {% assign sfeatured = featured | split: ":" %}
+        {% assign cid = sfeatured | first %}
+        {% capture compaire %}
+        {{ compaire }} {{ cid }}
+        {% endcapture %}
+        {% endfor %}
+
+        {% for collection in collections  %}
+        {% if compaire contains collection.id %}
+        <li class="item">{% include 'collection-grid-item' %}</li>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        {% assign featured_collection = "133039095860, 133039161396, 133039128628" | split: ", " %}
+        {% for featured in featured_collection %}
+        {% assign sfeatured = featured | split: ":" %}
+        {% assign cid = sfeatured | first %}
+        {% capture compaire %}
+        {{ compaire }} {{ cid }}
+        {% endcapture %}
+        {% endfor %}
+
+        {% for collection in collections  %}
+        {% if compaire contains collection.id %}
+        <li class="item">{% include 'collection-grid-item' %}</li>
+        {% endif %}
+        {% endfor %}
+
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+</div>{% endcomment %}

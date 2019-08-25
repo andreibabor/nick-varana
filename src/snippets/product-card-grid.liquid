@@ -1,0 +1,40 @@
+<div class="grid-view-item{% unless product.available %} grid-view-item--sold-out{% endunless %} product-card">
+  <a class="grid-view-item__link grid-view-item__image-container" href="{{ product.url | within: collection }}">
+    <span class="visually-hidden">{{ product.title }}</span>
+  </a>
+
+  {% capture img_id %}ProductCardImage-{{ section.id }}-{{ product.id }}{% endcapture %}
+  {% capture wrapper_id %}ProductCardImageWrapper-{{ section.id }}-{{ product.id }}{% endcapture %}
+  {%- assign img_url = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+  {% unless product.featured_image == blank %}
+    {% include 'image-style' with image: product.featured_image, width: max_height, height: max_height, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
+  {% endunless %}
+
+  <div id="{{ wrapper_id }}" class="grid-view-item__image-wrapper product-card__image-wrapper js">
+    <div style="padding-top:{% unless product.featured_image == blank %}{{ 1 | divided_by: product.featured_image.aspect_ratio | times: 100}}%{% else %}100%{% endunless %};">
+    	<a href="{{ product.url | within: collection }}">
+    		<img id="{{ img_id }}" class="grid-view-item__image lazyload" src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.featured_image.alt }}">
+    		<img style="display: none" src="{{ product.images[1] | product_img_url: 'large' }}" class="porduct-secondary-image" alt="{{ product.images[1].alt | escape }}" />
+    	</a>
+      <a style="display:none" href="{{ product.url | within: collection }}" class="product-addtocart-secondary">Add to Cart</a>
+      	
+    </div>
+  </div>
+
+  <noscript>
+    {% capture image_size %}{{ max_height }}x{{ max_height }}{% endcapture %}
+    <img class="grid-view-item__image" src="{{ product.featured_image.src | img_url: image_size, scale: 2 }}" alt="{{ product.featured_image.alt }}" style="max-width: {{ max_height | times: product.featured_image.aspect_ratio }}px;">
+  </noscript>
+  
+  <div class="h4 grid-view-item__title product-card__title" aria-hidden="true">
+    <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+    
+  </div>
+
+  {% include 'product-price', variant: product %}
+  {% if product.type != 'Leather Belts' %}
+  	<a href="{{ product.url | within: collection }}" class="product-colors-secondary">All Colours</a>
+  {% endif %}
+      
+{% include 'preorder-now-collection-item' %}</div>

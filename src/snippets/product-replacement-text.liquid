@@ -1,0 +1,5 @@
+{{ product.description | split: '<!-- split -->' | first 
+| replace: '<!-- ShippingReturns -->', 
+'<p>Shipping and returns tab description</p>'
+
+}}

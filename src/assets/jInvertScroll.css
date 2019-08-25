@@ -1,0 +1,51 @@
+.announcement-bar{
+  position: fixed !important;
+  z-index: 99999;
+}
+header.site-header.logo--center {
+    position: fixed !important;
+  	-webkit-transform: translate(0,0) !important;
+    transform: translate(0,0) !important;
+  top: 38px !important;
+  z-index: 9999;
+}
+#lookbookContainer {
+    /*overflow-x: scroll;
+    overflow-y: hidden;*/
+    white-space: nowrap;
+   height: calc(100vh - 128px);
+  
+    position: fixed;
+    z-index: 9;
+    background-color: #fff;
+  overflow: hidden;
+  bottom: 0px;
+  
+}
+#lookbookContainer section.section {
+    display: inline-block;
+    overflow: hidden;
+  height: 100%;
+  max-height: 99%;
+}
+.prefooter, div#shopify-section-footer {
+    display: none;
+}
+.lookbook-wrap{
+ min-height: 100% !important; 
+}
+div#PageContainer {
+  -webkit-transform: none !important;
+    transform: none !important;
+}
+div#fakecontent {
+    background-color: #f7f7f7;
+}
+
+@media screen and (max-width: 749px){
+  
+#lookbookContainer {
+   height: calc(100vh - 100px);
+}
+
+}

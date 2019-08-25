@@ -1,0 +1,76 @@
+<div class="plp-explore">
+  <div id="shopify-section-collection-slider" class="shopify-section related-articles-slider index-section border-bottom">
+    <div class="page-width collection-slider" data-aos="fade-up">
+
+      <div class="section-header text-center">
+        <h2>DISCOVER OTHER STORIES</h2>
+      </div>
+
+      <div class="collection-grid">
+        <ul class="collection-list-slider related-blogs-slider owl-carousel owl-theme">
+          {% assign featured = article.metafields["global"]["featuredArticles"] | split: "," %}
+
+          {% if featured != blank %}
+
+          {% assign article_handles = featured | where: "true" %}
+          {% assign compaire = '' %}
+
+          {% for handle in article_handles %}
+            {% assign sfeatured = handle | split: ":" %}
+            {% assign hid = sfeatured | first %}
+            {% assign boolean = sfeatured | last %}
+
+            {% if boolean == 'true' %}
+              {% capture compaire %}
+              {{ compaire }} {{ hid }}
+              {% endcapture %}
+
+              {% assign article = articles[hid] %}
+              <li class="item">
+                {% if article.image %}
+                  {%- assign article_image = article.image -%}
+                {% else %}
+                  {% assign article_image = blank %}
+                {% endif %}
+
+                <div class="collection-grid-item">
+                  <a href="{{article.url }}" class="collection-grid-item__link">
+                    {% unless article_image == blank %}
+                      <div class="collection-grid-item__overlay box ratio-container lazyload js"
+                        data-bgset="{% include 'bgset', image: article_image %}"
+                        data-sizes="auto"
+                        data-parent-fit="cover"
+                        style="background-image: url('{{ article_image | img_url: '300x300' }}')">
+                      </div>
+                      <noscript>
+                        <div class="collection-grid-item__overlay" style="background-image: url('{{ article_image | img_url: '1024x1024' }}')"></div>
+                      </noscript>
+                    {% else %}
+
+                        <div class="collection-grid-item__overlay" style="background-image: url('{{ article_image | img_url: '1024x1024' }}')"></div>
+                    {% endunless %}
+
+                    <div class="collection-grid-item__title-wrapper">
+                      <div class="collection-grid-item__title h3">
+                        <span class="cgit_inner">
+                          {% if article.title == blank %}
+                            {{ 'homepage.onboarding.collection_title' | t }}
+                          {% else %}
+                            {{ article.title }}
+                          {% endif %}
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% endif %}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
