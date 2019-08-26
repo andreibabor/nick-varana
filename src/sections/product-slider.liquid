@@ -1,109 +1,108 @@
 <div class="main-slider-content" data-aos="fade-up">
-<div class="  page-width">
- 	<div class="grid grid--no-gutters grid--table">
-	 	<div class="grid__item medium-up--one-half ">
-		 	 {% if section.settings.title != blank %}
-		      <div class="section-header text-left">
-		        <h2 class="h2 section-header__title">{{ section.settings.title }}</h2> 
-		        <a href="{{ section.settings.btnLink }}" class="btn dark">{{ section.settings.btnTitle }}</a>
-		      </div>
-		    {% endif %}
-		</div>
-	    <div class="grid__item medium-up--one-half ">
-	    	<p>{{ section.settings.discription }}</p>
-	    </div>
-	</div>
-<div class="products-slider owl-carousel owl-theme">
- 
-{% for product in collections[section.settings.product_collection].products
-									limit: section.settings.home_slider_limit %}
- 
-  <div class="item   grid__item--{{section.id}} {{ grid_item_width }}">
-  
-	  {%- assign img_url = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-		<div class=" product-card__image-wrapper">
-		    <a href="{{ product.url }}"><img  
-		    class="grid-view-item__image lazyload"
-		    src="{{ product.featured_image | img_url: '300x300' }}"
-		    data-src="{{ img_url }}"
-		    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-		    data-aspectratio="{{ product.featured_image.aspect_ratio }}"
-		    data-sizes="auto"
-		    alt="{{ product.featured_image.alt }}">
-          <img style="display: none" src="{{ product.images[1] | product_img_url: 'large' }}" class="porduct-secondary-image" alt="{{ product.images[1].alt | escape }}" />
-          </a><a style="display:none" href="{{ product.url }}" class="product-addtocart-secondary">Add to Cart</a>
+  <div class="page-width">
+    <div class="grid grid--no-gutters grid--table">
+     <div class="grid__item medium-up--one-half ">
+       {% if section.settings.title != blank %}
+       <div class="section-header text-left">
+        <h2 class="h2 section-header__title">{{ section.settings.title }}</h2> 
+        <a href="{{ section.settings.btnLink }}" class="btn dark">{{ section.settings.btnTitle }}</a>
+      </div>
+      {% endif %}
+    </div>
+    <div class="grid__item medium-up--one-half ">
+      <p>{{ section.settings.discription }}</p>
+    </div>
+  </div>
+  <div class="products-slider owl-carousel owl-theme">
+   
+    {% for product in collections[section.settings.product_collection].products
+    limit: section.settings.home_slider_limit %}
     
-		</div> 
+    <div class="item   grid__item--{{section.id}} {{ grid_item_width }}">
+      
+     {%- assign img_url = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+     <div class=" product-card__image-wrapper">
+      <a href="{{ product.url }}"><img  
+        class="grid-view-item__image lazyload"
+        src="{{ product.featured_image | img_url: '300x300' }}"
+        data-src="{{ img_url }}"
+        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+        data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+        data-sizes="auto"
+        alt="{{ product.featured_image.alt }}">
+        <img style="display: none" src="{{ product.images[1] | product_img_url: 'large' }}" class="porduct-secondary-image" alt="{{ product.images[1].alt | escape }}" />
+      </a><a style="display:none" href="{{ product.url }}" class="product-addtocart-secondary">Add to Cart</a>
+      
+    </div> 
 
-		{% include 'product-card-grid' %}
- 
-   	</div>  
-	{% endfor %} 
- </div>
+    {% include 'product-card-grid' %}
+    
+  </div>  
+  {% endfor %} 
+</div>
 
- </div>
+</div>
 </div>
 {% schema %}
+{
+  "name": "Products Slider",
+  "settings": [
   {
-    "name": "Products Slider",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Heading",
-        "default": "Product slideshow"
-      },
+  "type": "text",
+  "id": "title",
+  "label": "Heading",
+  "default": "Product slideshow"
+},
 
-      {
-        "type": "text",
-        "id": "discription",
-        "label": "Discription",
-        "default": "Write discription here"
-      },
+{
+  "type": "text",
+  "id": "discription",
+  "label": "Discription",
+  "default": "Write discription here"
+},
 
-      {
-        "type": "text",
-        "id": "btnTitle",
-        "label": "Button",
-        "default": "Discover More"
-      },
-      {
-        "type": "text",
-        "id": "btnLink",
-        "label": "Button Link",
-        "default": "#"
-      },
-      {
-        "type": "collection",
-        "id": "product_collection",
-        "label": "Collection"
-      },
+{
+  "type": "text",
+  "id": "btnTitle",
+  "label": "Button",
+  "default": "Discover More"
+},
+{
+  "type": "text",
+  "id": "btnLink",
+  "label": "Button Link",
+  "default": "#"
+},
+{
+  "type": "collection",
+  "id": "product_collection",
+  "label": "Collection"
+},
 
-      {
-        "type": "select",
-        "id": "home_slider_limit",
-        "label": "How many products to select for slideshow",
-        "options": [
-          {
-            "value": "6",
-            "label": "6"
-          },
-          {
-            "value": "9",
-            "label": "9"
-          },
-          {
-            "value": "15",
-            "label": "15"
-          }
-      ]
-    }
-    ],
-    "presets": [{
-      "name": "Products Slideshow",
-      "category": "product"
-    }],
-    "blocks" : []
-  }
+{
+  "type": "select",
+  "id": "home_slider_limit",
+  "label": "How many products to select for slideshow",
+  "options": [
+  {
+  "value": "6",
+  "label": "6"
+},
+{
+  "value": "9",
+  "label": "9"
+},
+{
+  "value": "15",
+  "label": "15"
+}
+]
+}
+],
+"presets": [{
+"name": "Products Slideshow",
+"category": "product"
+}],
+"blocks" : []
+}
 {% endschema %}
- 
