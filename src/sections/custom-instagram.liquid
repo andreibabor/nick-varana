@@ -1,0 +1,46 @@
+<section id="custom">
+  <div id="instagram-box">
+    <div class="page-width" data-aos="fade-up">
+      <div class="grid">
+        <div class="grid__item medium-up--one-whole">
+
+         {% if section.settings.title != blank %}
+         <div class="text-center">
+         <img src="{{ 'instagram.jpg' | asset_url }}" alt="icon-instagram">
+         <h4 class="">{{ section.settings.title | escape }}</h4>
+         <span id="pipe">|</span>
+         </div>
+         {% endif %}
+
+
+
+
+
+
+         <div id="instafeed-gallery-feed" class="owl-carousel owl-theme gallery row no-gutter">
+         </div>
+
+       </div>
+     </div>
+   </div>
+ </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Instagram Slidesho",
+  "settings": [
+  {
+  "type": "text",
+  "id": "title",
+  "label": "Heading",
+  "default": "FOLLOW OUR JOURNEY"
+}
+],
+"presets": [{
+"name": "Custom Instagram Slideshow",
+"category": "Advanced layout"
+}],
+"blocks" : []
+}
+{% endschema %}

@@ -311,14 +311,14 @@ $(document).ready(function() {
     $(".blog-menu-box").hide();
     $("#" + blogid).show();
   });*/
-  
-  var winWidth = $(window).width();
+
+var winWidth = $(window).width();
   // if (winWidth > 767) {
   //   var lookbookContainer = new fullpage('#lookbookContainer', {
   //     navigation: true,
   //     navigationPosition: 'right',
   //     autoScrolling:true,
-      
+
   //     menu: '#fp-nav > ul',
   //     loopTop: true,
   //     loopBottom: true
@@ -599,32 +599,33 @@ $(document).ready(function() {
     }
   });
 
+
     // HomePage Custom Products Slideshow 
-  $('.custom-products-homepage').owlCarousel({
-    margin:30,
-    loop:false,
-    nav:true,
-    slideTransition: 'linear',
-    navText: [
-    '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
-    ],
-    dots: true,
-    responsive:{
-      0:{
-        items:2
-      },
-      767:{
-        items:3
-      },
-      1100:{
-        items:4
+    $('.custom-products-homepage').owlCarousel({
+      margin:30,
+      loop:false,
+      nav:true,
+      slideTransition: 'linear',
+      navText: [
+      '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+      '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+      ],
+      dots: true,
+      responsive:{
+        0:{
+          items:2
+        },
+        767:{
+          items:3
+        },
+        1100:{
+          items:4
+        }
       }
-    }
-  });
+    });
 
 
-  var winWidth = $(window).width();
+    var winWidth = $(window).width();
     //begin upsell minicart mobile slider
     if (winWidth <= 767) {
       $('.mobile-slider').owlCarousel({
@@ -731,13 +732,13 @@ $(document).ready(function() {
   //  }
   // });
 
-  $(".product-single__description.rte .tabs > li").each(function(){
-    $("> a",this).attr("href","javascript:void(0)");
-    $(this).append("<div class='tab__descriptions'>"+ $(".tabs-content").find("> li").eq($(this).index()).html() +"</div>");
-  });
+$(".product-single__description.rte .tabs > li").each(function(){
+  $("> a",this).attr("href","javascript:void(0)");
+  $(this).append("<div class='tab__descriptions'>"+ $(".tabs-content").find("> li").eq($(this).index()).html() +"</div>");
+});
 
-  $(".product-single__description.rte .tabs > li:first-child").addClass("active");
-  $(".product-single__description.rte .tabs > li:first-child .tab__descriptions").show();
+$(".product-single__description.rte .tabs > li:first-child").addClass("active");
+$(".product-single__description.rte .tabs > li:first-child .tab__descriptions").show();
 
   /*$("body.template-product ul.media__nav>li:not(.active)").on("click",function(){
     
@@ -748,52 +749,52 @@ $(document).ready(function() {
     $(this).addClass("active");
   });*/
 
-  $("a.site-header__icon.site-header__cart").attr("href","javascript:void(0)");
+$("a.site-header__icon.site-header__cart").attr("href","javascript:void(0)");
 
-  $("a.site-header__icon.site-header__cart").on("click",function(){
-    if ($(".sidebar_cart_container").hasClass("active")) {
-      $(".sidebar_cart_container").removeClass("active");
-      $("body").css("overflow", "auto");
-    } else {
-      $(".sidebar_cart_container").addClass("active");
-
-      $(".sidebar_cart_items").addClass("focus");
-
-      setTimeout(function() { 
-        $(".sidebar_cart_items").removeClass("focus");
-      }, 4000);
-
-      $("body").css("overflow", "hidden");
-    }      
-
-  });
-  $("body").on("click","#cart_close,.sidebar_cart_container.active .overlay, .cart__submit-continue a",function(){
+$("a.site-header__icon.site-header__cart").on("click",function(){
+  if ($(".sidebar_cart_container").hasClass("active")) {
     $(".sidebar_cart_container").removeClass("active");
     $("body").css("overflow", "auto");
-  });
+  } else {
+    $(".sidebar_cart_container").addClass("active");
 
-  if ( $(".grid--blog").length > 0) {
-    $('.grid.grid--uniform.grid--blog').infiniteScroll({
-      path: '.pagination__next__link',
-      append: 'li.grid__item',
-      history: false,
-      hideNav: '.blog_pagination',
-      status: '.page-load-status'
-    });
+    $(".sidebar_cart_items").addClass("focus");
+
+    setTimeout(function() { 
+      $(".sidebar_cart_items").removeClass("focus");
+    }, 4000);
+
+    $("body").css("overflow", "hidden");
+  }      
+
+});
+$("body").on("click","#cart_close,.sidebar_cart_container.active .overlay, .cart__submit-continue a",function(){
+  $(".sidebar_cart_container").removeClass("active");
+  $("body").css("overflow", "auto");
+});
+
+if ( $(".grid--blog").length > 0) {
+  $('.grid.grid--uniform.grid--blog').infiniteScroll({
+    path: '.pagination__next__link',
+    append: 'li.grid__item',
+    history: false,
+    hideNav: '.blog_pagination',
+    status: '.page-load-status'
+  });
+}
+
+$(".product-form.product-form-product-template").submit(function(e) {
+  e.preventDefault();
+  var variant_id = $('#ProductSelect-product-template').val();
+
+  dataVariant = {
+    "quantity": 1,
+    "id": variant_id
   }
 
-  $(".product-form.product-form-product-template").submit(function(e) {
-    e.preventDefault();
-    var variant_id = $('#ProductSelect-product-template').val();
-
-    dataVariant = {
-      "quantity": 1,
-      "id": variant_id
-    }
-
-    $.ajax({
-      type: 'POST',
-      url: '/cart/add.js',
+  $.ajax({
+    type: 'POST',
+    url: '/cart/add.js',
       // data: $(this).serialize(),
       data: dataVariant,
       dataType: 'json',
@@ -807,48 +808,155 @@ $(document).ready(function() {
         }
       }
     }); 
+});
+
+$("body").on("click",".cart__remove",function(e) {
+  e.preventDefault();
+  var itemID = $(this).attr("data-item");
+  $.post('/cart/update.js', 'updates['+itemID+']=0')
+  .always(function() {
+    if(window.location.href.indexOf("cart=success") > -1) {
+      window.location.href = window.location.href
+    } else if(window.location.href.indexOf("?") > -1) {
+      window.location.href = window.location.href + "&cart=success";
+    } else{
+      window.location.href = window.location.href + "?cart=success";
+    }
   });
 
-  $("body").on("click",".cart__remove",function(e) {
-    e.preventDefault();
-    var itemID = $(this).attr("data-item");
-    $.post('/cart/update.js', 'updates['+itemID+']=0')
-    .always(function() {
-      if(window.location.href.indexOf("cart=success") > -1) {
-        window.location.href = window.location.href
-      } else if(window.location.href.indexOf("?") > -1) {
-        window.location.href = window.location.href + "&cart=success";
-      } else{
-        window.location.href = window.location.href + "?cart=success";
-      }
-    });
+});
+$(".slideshow__text-wrap").on("click",function(){
+  window.location.href = $(this).attr("data-link");
+});
 
-  });
-  $(".slideshow__text-wrap").on("click",function(){
-    window.location.href = $(this).attr("data-link");
-  });
-
-  $(".related-blogs-slider .owl-nav").hide();
+$(".related-blogs-slider .owl-nav").hide();
 
  // $(".sectionFooter").append('<div class="prefooter">'+$(".prefooter").html() +'</div>' + $("div#shopify-section-footer").html())
 
 
  if(getUrlParameter('cart')=='success'){
   $("a.site-header__icon.site-header__cart").trigger("click");  
- }
+}
 
- $("ul.bs-vert-nav li:not(.active)").on("click",function(){
+$("ul.bs-vert-nav li:not(.active)").on("click",function(){
   $(".bs-vert-content li").removeClass("active");
   $("ul.bs-vert-nav li").removeClass("active");
   $(this).addClass("active");
   $(".bs-vert-content li#"+$(this).attr("data-id")).addClass("active");
- });
- $(".bs-tab-nav li:not(.active)").on("click",function(){
+});
+$(".bs-tab-nav li:not(.active)").on("click",function(){
   var parentItem = $(this).parent("ul").parent("div").parent("div");
   $(".bs-tab-cotent,.bs-tab-nav li",parentItem).removeClass("active");
   $(this).addClass("active");
   $(".bs-tab-cotent#tb-content-"+$(this).attr("data-id"),parentItem).addClass("active");
- });
+});
+
+
+ //begin instagram config
+ var galleryFeed = new Instafeed({
+  get: "user",
+  userId: 4622774,
+  accessToken: "4622774.7cbaeb5.ec8c5041b92b44ada03e4a4a9153bc54",
+  resolution: "standard_resolution",
+  useHttp: "true",
+  limit: 10,
+  sortBy: "most-recent", 
+  template: 
+    // '<a href="{{image}}">'+
+    '<div class="img-featured-container">'+
+    '<div class="img-backdrop"></div>'+
+    '<div class="description-container">'+
+          // '<p class="caption">{{caption}}</p>'+
+          // '<span class="likes"><i class="icon ion-heart"></i> {{likes}}</span>'+
+          // '<span class="comments"><i class="icon ion-chatbubble"></i> {{comments}}</span>'+
+          '</div>'+
+          // '<img src="{{image}}" class="img-responsive">'+
+          '<span class="img-span" style="background-image:url({{image}})"></span>'+
+          '</div>',
+    // '</a>'+
+    target: "instafeed-gallery-feed",
+    after: function() {
+    // disable button if no more results to load
+    if (!this.hasNext()) {
+      btnInstafeedLoad.setAttribute('disabled', 'disabled');
+    }
+    
+    var owl = $(".owl-carousel"),
+    owlSlideSpeed = 300;
+
+    // init owl    
+    $(document).ready(function(){
+      owl.owlCarousel({
+        // navContainer: '.owl-nav-custom',
+        // dotsContainer: '.owl-dots-custom',
+        autoplay: false,
+        loop:true,
+        margin:130,
+        nav:true,
+        center: true,
+        slideTransition: 'linear',
+        navText: [
+        '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+        '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+        ],
+        dots: false,
+        responsive:{
+          0:{
+            items:1
+          },
+          200:{
+            items:2
+          },
+          400:{
+            items:3
+          },
+          768:{
+            items:3
+          }
+        }
+      });
+    });
+
+    // keyboard controls
+    $(document.documentElement).keydown(function(event) {
+      if (event.keyCode == 37) {
+        owl.trigger('prev.owl.carousel', [owlSlideSpeed]);
+      }
+      else if (event.keyCode == 39) {
+        owl.trigger('next.owl.carousel', [owlSlideSpeed]);
+      }
+    });
+  }
+});
+
+galleryFeed.run();
+
+var btnInstafeedLoad = document.getElementById("btn-instafeed-load");
+// btnInstafeedLoad.addEventListener("click", function() {
+//   galleryFeed.next()
+// });
+
+
+
+
+
+
+
+
+
+//  var userFeed = new Instafeed({
+//   get: 'user',
+//   userId: '8987997106',
+//   clientId: '924f677fa3854436947ab4372ffa688d',
+//   accessToken: '8987997106.924f677.8555ecbd52584f41b9b22ec1a16dafb9',
+//   resolution: 'standard_resolution',
+//   template: '<div class="item grid__item--{{section.id}} {{ grid_item_width }}"><a href="{{link}}" target="_blank" id="{{id}}"><img src="{{image}}" /></a></div>',
+//   sortBy: 'most-recent',
+//   limit: 60,
+//   links: false
+// });
+//  userFeed.run();
+// end instagram config
 
 
 });
