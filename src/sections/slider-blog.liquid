@@ -1,0 +1,234 @@
+
+<div class="home-location">
+  <img src="https://cdn.shopify.com/s/files/1/0597/8805/t/180/assets/Cropped-Store.jpg?4538" />
+  <div class="page-width">
+    <div class="location-box">
+      <h2>Our Locations</h2>
+      <p>Explore our collection in our flagship stores.</p>
+      <a href="/pages/services/#stores" class="btn dark">Discover More</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-width slider-blog-section" data-aos="fade-up">
+  <div class="grid__item small--one-half medium-up--one-third">
+
+    <div class="section-header text-left">
+      <h2 class="h2 section-header__title">NEW STORIES</h2>  
+    </div>
+    {%- assign blog = blogs.news -%}
+
+    <ul class="grid grid--uniform grid--blog"> 
+
+      {% for article in blog.articles limit: 1 %}
+      <li class="">
+       <a href="{{ article.url }}" class="article__link">
+        {% if article.image %}
+        {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+        {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+        {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+        {% include 'image-style' with image: article.image, small_style: true, width: 345, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+        <div id="{{ img_wrapper_id }}" class="article__grid-image-wrapper js">
+          <div class="article__grid-image-container" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
+            
+            <img id="{{ img_id }}"
+              class="article__grid-image lazyload"
+              src="{{ article.image | img_url: '500x500' }}"
+              >
+
+            {% comment %}
+            <img id="{{ img_id }}"
+              class="article__grid-image lazyload"
+              src="{{ article.image | img_url: '300x300' }}"
+              data-src="{{ img_url }}"
+              data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+              data-aspectratio="{{ article.image.aspect_ratio }}"
+              data-sizes="auto"
+              alt="">
+            {% endcomment %}
+          </div>
+        </div>
+        <noscript>
+          <div class="article__grid-image-wrapper">
+            {{ article | img_url: '345x345', scale: 2 | img_tag: article.title, 'article__grid-image' }}
+          </div>
+        </noscript>
+        {% endif %}
+
+        <div class="article__meta">
+          <span class="article__date">
+            {{ article.published_at | time_tag: format: 'month_day_year' }}
+          </span>
+          <span class="article__cat">
+            {{ blog.title }}
+          </span>
+        </div>
+
+        <h3 class="article__title{% if article.image %} article__title--has-image{% endif %}">
+          {{ article.title }}
+        </h3>
+      </a>
+
+      <div class="article__grid-meta{% if article.image %} article__grid-meta--has-image{% endif %}">
+        {% if section.settings.blog_show_author %}
+        <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+        {% endif %}
+
+        {% if section.settings.blog_show_date %}
+        <span class="article__date">
+          {{ article.published_at | time_tag: format: 'month_day_year' }}
+        </span>
+        {% endif %}
+
+        <div class="rte article__grid-excerpt">
+          {% if article.excerpt.size > 0 %}
+          {{ article.excerpt }}
+          {% else %}
+          {{ article.content | strip_html | truncate: 150 }}
+          {% endif %}
+        </div>
+      </div>
+
+    </li>
+    {% endfor %}
+
+  </ul>
+
+</div>
+
+<!-- Tabs -->
+<div class="grid__item two-thirds">
+  {%- assign post_tabs1 = blogs[section.settings.post_tabs1] -%}
+  {%- assign post_tabs2 = blogs[section.settings.post_tabs2] -%}
+  {%- assign post_tabs3 = blogs[section.settings.post_tabs3] -%}
+  <ul class="tabs clearfix" data-tabgroup="first-tab-group">
+
+  </ul>
+
+  <section id="first-tab-group" class="tabgroup">
+    <div id="tab3">
+
+     <ul class="grid grid--uniform grid--blog post-slider owl-carousel owl-theme"> 
+      {% for article in post_tabs3.articles limit: 6 offset:1 %}
+      <li class="grid__item">
+       <a href="{{ article.url }}" class="article__link">
+        {% if article.image %}
+        {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+        {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+        {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+        {% include 'image-style' with image: article.image, small_style: true, width: 345, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+        <div id="{{ img_wrapper_id }}" class="article__grid-image-wrapper js">
+          <div class="article__grid-image-container hslider-image-container">
+            <div class="hslider-image"  style="background-image: url('{{ article.image | img_url: '500x500' }}');"></div>
+          </div>
+        </div>
+        <noscript>
+          <div class="article__grid-image-wrapper">
+            {{ article | img_url: '345x345', scale: 2 | img_tag: article.title, 'article__grid-image' }}
+          </div>
+        </noscript>
+        {% endif %}
+
+        <div class="article__meta">
+          <span class="article__date">
+            {{ article.published_at | time_tag: format: 'month_day_year' }}
+          </span>
+          <span class="article__cat">
+            {{ post_tabs3.title }}
+          </span>
+        </div>
+
+        <h4 class="blog_title article__title{% if article.image %} article__title--has-image{% endif %}">
+          {{ article.title }}
+        </h4>
+      </a>
+
+    </li>
+    {% endfor %}
+  </ul>
+
+</div>
+</section>
+
+</div>
+</div>
+
+
+{% schema %}
+{
+ "settings": [
+ {
+  "type": "text",
+  "id": "title",
+  "label": {
+  "en": "Latest Heading"
+},
+"default": { 
+"en": "Latest NEws" 
+}
+},
+{
+  "id": "blog",
+  "type": "blog",
+  "label": { 
+  "en": "Latest Blog" 
+}
+},
+{
+  "type": "text",
+  "id": "post_title_tabs1",
+  "label": {
+  "en": "Tab One Title"
+} 
+},
+{
+  "type": "blog",
+  "id": "post_tabs1",
+  "label": {
+  "en": "Tab One"
+} 
+},
+{
+  "type": "text",
+  "id": "post_title_tabs2",
+  "label": {
+  "en": "Tab two Title"
+} 
+},
+{
+  "type": "blog",
+  "id": "post_tabs2",
+  "label": {
+  "en": "Tab Two"
+} 
+},
+{
+  "type": "text",
+  "id": "post_title_tabs3",
+  "label": {
+  "en": "Tab Three Title"
+} 
+},
+{
+  "type": "blog",
+  "id": "post_tabs3",
+  "label": {
+  "en": "Tab Three"
+} 
+}  
+],
+
+"presets": [
+{
+  "name": { 
+  "en": "Slider Blog posts"
+},
+"category": { 
+"en": "Blog" 
+} 
+}
+]
+}
+{% endschema %}

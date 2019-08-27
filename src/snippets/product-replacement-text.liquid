@@ -1,0 +1,39 @@
+{{ product.description | split: '<!-- split -->' | first 
+| replace: '<!-- ShippingReturns -->', 
+'<thead>
+<tr><th colspan="2">Flat Rate Shipping</th></tr>
+</thead>
+<tbody>
+<tr>
+<td class="country">UK</td>
+<td>Free</td>
+</tr>
+<tr>
+<td class="country">EU</td>
+<td>£30</td>
+</tr>
+<tr>
+<td class="country">USA</td>
+<td>£40</td>
+</tr>
+<tr>
+<td class="country">UAE</td>
+<td>£50</td>
+</tr>
+<tr>
+<td class="country">China</td>
+<td>£50</td>
+</tr>
+<tr>
+<td class="country">India</td>
+<td>£50</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>Taxes and duties will be calculated at checkout for these countries. <br> We can ship worldwide so if you are located in any other country, please contact us at <a href="mailto:hello@varanaworld.com">hello@varanaworld.com</a> or call us at London (<a href="+44203903444">+44 203 903 444</a>)&nbsp;</p>
+<p></p>
+<p><span style="color: #ae2b2c;">RETURNS</span></p>
+<p>We offer free returns within the UK. For information on how to return a <span>garment</span>, please check&nbsp;<a href="/pages/shipping-returns">Shipping and Returns</a>.</p>'
+
+}}

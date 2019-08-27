@@ -1,0 +1,154 @@
+{% assign cart_total = cart.total_price %}
+
+<div class="sidebar_cart_container {% if cart_total == 0 %}empty_sidebar_cart_container{%endif%} ">
+  <div class="sidebar_cart_inner">
+    {% if cart.item_count > 0 %}
+
+    <div class="sidebar-cart-items">
+      <h2><span>{%include 'shopping-cart-icon' %}</span> Your Cart {% if cart.item_count > 0 %}({{cart.item_count}}){%endif%}</h2>
+      <button id="cart_close">x</button>
+      <div class="sidebar__content">
+        <form action="/cart" method="post" novalidate class="cart">
+          <div class="sidebar_cart_items">
+            {% for item in cart.items %}
+
+            <div class="sidebar_cart_item">
+              <div class="cart_item_img">
+                <img class="cart__image" src="{{ item | img_url: '95x95', scale: 2 }}" alt="{{ item.title | escape }}" data-item-url="{{ item.url }}">
+              </div>
+              <div class="cart_item_content">
+                <div class="cart_item_title">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </div>
+                <div class="cart_attr_qty">
+                  <div class="cart__attr">
+                    {% unless item.variant.title contains 'Default' %}
+                    <div class="cart__meta-text">
+                      {% for option in item.product.options %}
+                      {{ option }} <span>{{ item.variant.options[forloop.index0] }}</span>
+                      {% endfor %}
+                    </div>
+                    {% endunless %}
+                  </div>
+                  <div class="cart__qty">
+                    <div class="cart__qty" data-item="{{ item.key }}">
+                      <label for="updates_large_{{ item.key }}">{{ 'cart.label.quantity' | t }}</label>
+                      <input class="cart__qty-input" type="number" name="updates[]" id="updates_large_{{ item.key }}" value="{{ item.quantity }}" min="0" pattern="[0-9]*" data-quantity-item="{{ forloop.index }}">
+                    </div>
+                  </div>
+                </div>
+                <div class="cart_rbtn_price">
+                  <div class="cart__rbtn">
+                    <a href="javascript:void(0)" data-item="{{ item.variant_id }}" data-id="{{ forloop.index }}" class="btn btn--small btn--tertiary cart__remove" aria-label="{{ 'cart.general.remove' | t }} {{ item.product.title }}">{{ 'cart.general.remove' | t }}</a>
+                  </div>
+                  <div class="cart__price">
+                    {{ item.line_price | money }}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="cart__footer">
+            <div class="grid">
+
+              {% if section.settings.cart_notes_enable %}
+              <div class="grid__item medium-up--one-half cart-note">
+                <label for="CartSpecialInstructions" class="cart-note__label small--text-center">{{ 'cart.general.note' | t }}</label>
+                <textarea name="note" id="CartSpecialInstructions" class="cart-note__input">{{ cart.note }}</textarea>
+              </div>
+              {% endif %}
+              
+              <div class="grid__item text-right{% if section.settings.cart_notes_enable %} medium-up--one-half{% endif %}">
+                <div>
+                  <span class="cart__subtotal-title">Total:</span>
+                  <span class="cart__subtotal right">{{ cart.total_price | money }}</span>
+                </div>
+
+                {% if cart.total_discounts > 0 %}
+                <div class="cart__savings">
+                  {{ 'cart.general.savings' | t }}
+                  <span class="cart__savings-amount">{{ cart.total_discounts | money }}</span>
+                </div>
+                {% endif %}
+
+                {%- capture taxes_shipping_checkout -%}
+                {%- if shop.taxes_included and shop.shipping_policy.body != blank -%}
+                {{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                {%- elsif shop.taxes_included -%}
+                {{ 'cart.general.taxes_included_but_shipping_at_checkout' | t }}
+                {%- elsif shop.shipping_policy.body != blank -%}
+                {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+                {%- else -%}
+                {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
+                {%- endif -%}
+                {%- endcapture -%}
+
+                <div class="cart__submit-controls">
+                  <input type="submit" name="checkout"
+                  class="btn btn--small-wide cart__submit cart__submit-control"
+                  value="Checkout Securely">
+                </div>
+
+                {% comment %}<div class="cart__submit-continue">
+                  <a href="#">Continue Shopping</a>
+                </div>{% endcomment %}
+
+                {% comment %}<ul class="checkout-icons">
+                  <li class="cart-sidebar-lock">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 20">
+                      <g id="Group_371" data-name="Group 371" transform="translate(0)">
+                        <g id="Ellipse_1" data-name="Ellipse 1">
+                          <path id="Path_7" data-name="Path 7" d="M185.3,395.4v-2.79a5.109,5.109,0,0,0-1.38-3.69,4.957,4.957,0,0,0-8.62,3.67v2.81a7,7,0,1,0,10,0Zm-8-2.85a3,3,0,1,1,6-.06v1.49a6.867,6.867,0,0,0-6,0Zm3,12.74a5,5,0,1,1,5-5A5,5,0,0,1,180.3,405.29Z" transform="translate(-173.3 -387.29)" fill="#333"/>
+                        </g>
+                        <g id="Line_4" data-name="Line 4" transform="translate(6 11.099)">
+                          <rect id="Rectangle_35" data-name="Rectangle 35" width="2" height="3.9" fill="#333"/>
+                        </g>
+                      </g>
+                    </svg>
+                    <span>SECURE PAYMENTS</span>
+                  </li>
+                  <li class="cart-sidebar-payments">
+                    <span>
+                      <img src="https://cdn.shopify.com/s/files/1/0071/0659/2820/t/8/assets/american-express.png?24977" />
+                    </span>
+                    <span>
+                      <img src="https://cdn.shopify.com/s/files/1/0071/0659/2820/t/8/assets/maestro-pay-logo.png" />
+                    </span>
+                    <span>
+                      <img src="https://cdn.shopify.com/s/files/1/0071/0659/2820/t/8/assets/visa-pay-logo.png?25010" />
+                    </span>
+                    <span>
+                      <img src="https://cdn.shopify.com/s/files/1/0071/0659/2820/t/8/assets/mastercard.png" />
+                    </span>
+                    <span>
+                      <img src="https://cdn.shopify.com/s/files/1/0071/0659/2820/t/8/assets/paypal-logo.png" />
+                    </span>
+                  </li>
+                  <li class="cart-free-shipping"><p>Free Shipping & Returns</p></li>
+                </ul>{% endcomment %}
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+{% else %}
+
+<h2>Your cart is empty</h2>
+<button id="cart_close">x</button>
+<div class="sidebar__content">
+  <div class="empty-page-content text-center empty-cart">
+    <a href="/collections/all">Continue Shopping</a>
+  </div>
+</div>
+{% endif %}
+</div>
+
+<div class="overlay"></div>
+</div>
+
+

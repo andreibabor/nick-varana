@@ -1,0 +1,99 @@
+<div class="page-width">
+    {% assign featuredBlogs = 'featured-articles,other-articles,news' | split:',' %}
+    {% assign article_list = '' %}
+
+    {% assign featuredArticles = false %}
+
+    {% for featuredBlog in featuredBlogs %}
+        {% if blogs[featuredBlog].articles %}
+            {% if featuredArticles %}
+                {% assign featuredArticles = featuredArticles | concat:blogs[featuredBlog].articles %}
+            {% else %}
+                {% assign featuredArticles = blogs[featuredBlog].articles %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if featuredArticles %}
+        {% assign featuredArticles = featuredArticles | sort:'published_at' | reverse %}
+        <div class="jscroll">
+            <ul class="grid grid--uniform grid--blog">
+                {% for article in featuredArticles %}
+                    <li class="grid__item medium-up--one-half item-{% cycle '1', '2', '3', '4' , '5', '6' %}">
+                        <div class="blog-inner-wrap">
+                            <a href="{{ article.url }}" class="article__link">
+                                {% if article.image %}
+                                    {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+                                    {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+                                    {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                                    <div id="{{ img_wrapper_id }}" class="article__grid-image-wrapper js">
+                                        <div class="article__grid-image-container">
+                                            <img id="{{ img_id }}" src="{{ article.image | img_url: 'master' }}" alt="{{ article.title | escape }}">
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </a>
+
+                            <div class="article__grid-meta{% if article.image %} article__grid-meta--has-image{% endif %}">
+                                {% if section.settings.blog_show_author %}
+                                    <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+                                {% endif %}
+
+                                {% if section.settings.blog_show_date %}
+                                    <span class="article__date">
+                                {{ article.published_at | date: "%d %b %Y"  }}
+                                    </span>
+                                {% endif %}
+
+
+                                <h2 class="article__title h3{% if article.image %} article__title--has-image{% endif %}">
+                                    {{ article.title | escape }}
+                                </h2>
+
+                                <div class="rte article__grid-excerpt">
+                                    {% if article.excerpt.size > 0 %}
+                                        {{ article.excerpt }}
+                                    {% else %}
+                                        {{ article.content | strip_html | truncate: 150 }}
+                                    {% endif %}
+                                </div>
+
+                                {% if article.tags.size > 0 %}
+                                    <div class="article__tags rte">
+                                        <ul class="list--inline" aria-label="{{ 'blogs.article.tags' | t }}">
+                                            {% for tag in article.tags %}
+                                                <li><a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article__grid-tag">{{ tag }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+
+                                <ul class="list--inline article__meta-buttons">
+                                    <li>
+                                        <a href="{{ article.url }}" class="btn btn--tertiary btn--small" aria-label="{{ 'blogs.article.read_more_title' | t: title: article.title }}">
+                                            {{ 'blogs.article.read_more' | t }}
+                                        </a>
+                                    </li>
+
+                                    {% if blog.comments_enabled? and article.comments_count > 0 %}
+                                        <li>
+                                            <a href="{{ article.url }}#comments" class="article__comment-count btn btn--tertiary btn--small">
+                                                {{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="blog_pagination"> 
+                {% if paginate.pages > 1 %}
+                    {% include 'pagination' %}
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>

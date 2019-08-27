@@ -1,0 +1,185 @@
+{% comment %}<style>
+  .bx-controls-direction {display:none;}
+  .bx-wrapper .bx-viewport{margin-top:0;}
+</style>{% endcomment %}
+
+
+<script>
+  (function() {
+   var element = document.querySelector(".color-swatch");
+
+   if(typeof(element) != 'undefined' && element != null){
+
+    var images = [];
+    {% capture get_title %} - {{ product.title | strip }}{% endcapture %}
+    {% for image in product.images %}
+    images.push({url: "{{ image | product_img_url: '1x1' }}", alt: "{{ image.alt | append:get_title}}", id: "{{ image.id }}"});
+    {% endfor %}
+
+    var get_main_image = document.querySelector(".single-product-images"); 
+
+    function ShowImages(){
+
+      get_main_image.innerHTML= " ";
+
+      var selected = document.querySelector(".color-swatch .swatch-element input[type=radio]:checked").value; 
+
+      var get_main_selected = selected+' - '+ '{{ product.title }}';
+
+      images.forEach(AddImage);
+
+      function AddImage(item, index) {
+        var alt = images[index].alt, url = images[index].url.replace('_1x1.', '_1024x1024@2x.'), id = images[index].id;
+        if (alt == get_main_selected) {
+
+          get_main_image.innerHTML += '<div class="enlarge_contain" data-image-id="'+id+'" data-original-image="' + url.replace('_medium', '_1024x1024') + '"><img data-image-id="'+id+'" data-sizes="auto" class="lazyautosizes lazyloaded" data-src="' + url + '" alt="' + alt + '" src="' + url + '"><noscript><img id="'+id+'" class="product__image lazyload lazyload-fade" data-src="'+url+'" data-sizes="auto" data-zoom-src="'+url+'" alt="'+alt+'" /></noscript></div>';        
+
+        }
+      }
+
+    }
+
+    ShowImages();
+
+
+    var rad = document.querySelectorAll('input[data-name=color]');
+
+    for (var i = 0; i < rad.length; i++) {
+      rad[i].addEventListener('change', function() {
+       ShowImages();
+     });
+    }
+
+  }
+})();
+</script>
+
+{% comment %}<script>
+  var loadScript = function(url, callback){
+
+  /* JavaScript that will load the jQuery library on Google's CDN.
+     We recommend this code: http://snipplr.com/view/18756/loadscript/.
+     Once the jQuery library is loaded, the function passed as argument,
+     callback, will be executed. */
+
+     var script = document.createElement('script');
+
+    if (script.readyState) { // IE
+      script.onreadystatechange = function () {
+        if (script.readyState === 'loaded' || script.readyState === 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { // Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  };
+
+
+  var myAppJavaScript = function($){
+  /* Your app's JavaScript here.
+     $ in this scope references the jQuery object we'll use.
+     Don't use 'jQuery', or 'jQuery191', here. Use the dollar sign
+     that was passed as argument.*/
+ // $('body').append('<p>Your app is using jQuery version '+$.fn.jquery+'</p>');
+ console.log("Your app is using jQuery version"+$.fn.jquery);
+
+//Begin >>>>BBB code
+$( document ).ready(function() {
+
+// $("a.site-header__icon.site-header__cart").attr("href","javascript:void(0)");
+
+//  console.log("123456:"+$('.single-option-selector:eq(0)').parents('.select').find('label:eq(0)').text());
+if($('.color-swatch').length > 0 ){
+  //console.log("789"+$('.single-option-selector:eq(0)').parents('.select').find('label:eq(0)').text());
+  var images = [];
+  {% capture get_title %} - {{ product.title | strip }}{% endcapture %}
+  {% for image in product.images %}
+  images.push({url: "{{ image | product_img_url: '1x1' }}", alt: "{{ image.alt | append:get_title}}", id: "{{ image.id }}"});
+  {% endfor %}
+  // var thumbnails = $(".thumbs");  
+
+  var get_main_image = $(".single-product-images"); 
+  get_main_image.html("");   
+  var selected = $('.color-swatch .swatch-element input[type=radio]:checked').val();
+  var get_main_selected = selected+' - '+$('.product-single__title').text();
+  arr = [];
+  var addImage = $.each( images, function( i, image ) {
+
+    var alt = images[i].alt, url = images[i].url.replace('_1x1.', '_1024x1024@2x.'), id = images[i].id;   
+    if (alt == get_main_selected) {
+
+        // thumbnails.append('<div class="product-thumbnail image span2" data-original-image="' + url.replace('_medium', '_1024x1024') + '"><img data-image-id="'+id+'" data-sizes="auto" class="lazyload lazyload-fade" data-src="' + url + '" alt="' + alt + '" src-set="' + url + '"><noscript><img class="product-thumbnail" src="'+url+'" alt="'+alt+'" /></noscript></div>');
+
+        get_main_image.append('<div class="enlarge_contain" data-image-id="'+id+'" data-original-image="' + url.replace('_medium', '_1024x1024') + '"><img data-image-id="'+id+'" data-sizes="auto" class="lazyload lazyload-fade" data-src="' + url + '" alt="' + alt + '" src="' + url + '"><noscript><img id="'+id+'" class="product__image lazyload lazyload-fade" data-src="'+url+'" data-sizes="auto" data-zoom-src="'+url+'" alt="'+alt+'" /></noscript></div>');        
+
+      }
+
+    });
+
+  arr.push(addImage);
+
+
+  // swatch on change event
+  $('.color-swatch .swatch-element input:radio').change(function() {
+    var selected = $(this).val();
+    var get_main_selected = selected+' - '+$('.product-single__title').text();
+
+    // thumbnails.hide().html("");
+
+    get_main_image.html("");           
+    arr = [];
+    var addImage = $.each( images, function( i, image ) {
+
+      var alt = images[i].alt, url = images[i].url.replace('_1x1.', '_1024x1024@2x.'), id = images[i].id;   
+      if (alt == get_main_selected) {
+
+        // thumbnails.append('<div class="product-thumbnail image span2" data-original-image="' + url.replace('_medium', '_1024x1024') + '"><img data-image-id="'+id+'" data-sizes="auto" class="lazyload lazyload-fade" data-src="' + url + '" alt="' + alt + '" src-set="' + url + '"><noscript><img class="product-thumbnail" src="'+url+'" alt="'+alt+'" /></noscript></div>');
+
+        get_main_image.append('<div class="enlarge_contain" data-image-id="'+id+'" data-original-image="' + url.replace('_medium', '_1024x1024') + '"><img data-image-id="'+id+'" data-sizes="auto" class="lazyload lazyload-fade" data-src="' + url + '" alt="' + alt + '" src="' + url + '"><noscript><img id="'+id+'" class="product__image lazyload lazyload-fade" data-src="'+url+'" data-sizes="auto" data-zoom-src="'+url+'" alt="'+alt+'" /></noscript></div>');        
+
+      }
+
+    });
+
+    arr.push(addImage);
+    // $.when.apply($, arr).done(function () {
+
+    //   thumbnails.show(); 
+    //   $('.thumbs .image').on('click', function(e) { 
+
+    //     var get_image_id = jQuery(this).find('img').data('image-id');
+    //    // jQuery('.product-main-image').removeClass('selected').hide();
+    //    // jQuery('.product-main-image[data-image-id="'+get_image_id+'"]').addClass('selected').show();
+
+    //    $('html,body').animate({ scrollTop: jQuery('.product-main-image[data-image-id="'+get_image_id+'"]').offset().top-100}, 'slow');
+
+    //  });           
+    // });
+  });
+}                      
+
+});
+
+//End >>>>BBB code
+};
+
+if ((typeof jQuery === 'undefined') || (parseFloat(jQuery.fn.jquery) < 1.7)) {
+  loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', function(){
+    jQuery191 = jQuery.noConflict(true);
+    myAppJavaScript(jQuery191);
+  });
+} else {
+  myAppJavaScript(jQuery);
+}
+
+</script>{% endcomment %}
+
+
+

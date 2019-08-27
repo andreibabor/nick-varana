@@ -1,0 +1,96 @@
+{% assign collectionType = collection.description  %}
+
+  <div class="product__extra collection__extra">
+    <div class="page-width">
+{% if collectionType contains "extra Oxford Cotton" %}
+
+<div class="extra__left grid__item medium-up--two-thirds">
+  <h3>Crafted by skilled artisans, our oxford, brushed and piqué cottons epitomise classic Italian workmanship.</h3><p><img src="{{ "Cotton-left-new.jpg" | asset_url }}"></p>
+</div>
+<div class="extra__right grid__item medium-up--one-third">
+  <div class="product_extra__inner">
+    <p><span class="firstletter">W</span>e partner with the oldest Italian mills who have an artisanal approach to crafting cotton and carry out each step of the production in their territory, from Novara to Treviso. Decades of experience combined under the roof of their mills, situated in Northern Italy. </p><p><img src="{{ "oxford-right.jpg" | asset_url }}"></p><p>We use a variety of luxury fabrics for our shirts and polos. Silky brushed cotton from Grandi & Rubinelli for our winter and mid-seasons shirts, a cloth brushed on the face side to create a uniquely soft texture which naturally captures heat without losing any of its breathable qualities. Our oxford shirts are instead crafted from ‘doppio ritorto’ cotton which is elegant, strong and wrinkle resistant. The secret to the casual appeal of our elegant polo shirts is no less refined. Handcrafted in Bergamo, they are made exclusively from a soft and breathable cotton pique' which lends itself to everyday wear.</p>
+  </div>
+</div>
+
+{% elsif collectionType contains "extra Silk-Cashmere" %}
+
+<div class="extra__left grid__item medium-up--two-thirds">
+  <h3>OUR FINE SILK-CASHMERE IS CRAFTED FROM THE MOST PRESTIGIOUS CARIAGGI YARN. A GUARANTEE FOR OUTSTANDING SOFTNESS AND DURABILITY.</h3><p><img src="{{ "silk-left.jpg" | asset_url }}"></p>
+</div>
+<div class="extra__right grid__item medium-up--one-third">
+  <div class="product_extra__inner">
+    <p><span class="firstletter">I</span>n the heart of the verdant Marche Apennine Mountains of Italy, the Cariaggi factory harbours expertise reaching back over three generations. For 60 years, they have been selecting premium fibres and employing sophisticated technology and environmentally-friendly production methods in order to craft their exceptionally soft and durable silk-cashmere.</p><p><img src="{{ "silk-right.jpg" | asset_url }}"></p><p>Cariaggi’s international reputation for excellence begins with their dedication to sourcing the finest fibres by working closely with local communities. As well as the fine quality, silk-cashmere has a very practical advantage, proving that luxury and functionality can go hand-in-hand. Silk-cashmere yarn makes an extraordinarily light cloth, which can be worn throughout the year. It is particularly suitable for travelling due to its lightweight properties and can handle a variety of temperatures. This silk and cashmere blend drapes around your frame for a fitted look and is breathable and lightweight which helps to regulate your body temperature from mid-season to summer evenings.</p>
+  </div>
+</div>
+
+{% elsif collectionType contains "extra Cashmere" %}
+
+<div class="extra__left grid__item medium-up--two-thirds">
+  <h3>Our knitwear is crafted from pure cashmere from the renowned cariaggi fine yarns collection. A guarantee for outstanding softness and durability.</h3>
+  <p><img src="{{ "left-cashmere.jpg" | asset_url }}"></p>
+</div>
+<div class="extra__right grid__item medium-up--one-third">
+  <div class="product_extra__inner">
+    <p><span class="firstletter">I</span>n the heart of the verdant Marche Apennine Mountains of Italy, the Cariaggi factory harbours expertise reaching back over three generations. For 60 years, they have been selecting premium fibres and employing sophisticated technology and environmentally-friendly production methods in order to craft their exceptionally soft and durable cashmere.</p>
+
+    <p><img src="{{ "right-cashmere.jpg" | asset_url }}"></p>
+
+    <p>Cariaggi’s international reputation for excellence begins with their dedication to sourcing the finest fibres by working closely with local communities in Inner Mongolia. The specific climate of this region promotes the growth of a ‘duvet’; an exquisite fibre known for its natural thermoregulatory characteristics and exceptional softness and lightness, which translates into the luxurious features of this yarn.</p>
+  </div>
+</div>
+
+{% elsif collectionType contains "extra Brushed Cotton" %}
+
+
+<div class="extra__left grid__item medium-up--two-thirds">
+  <h3>Crafted by skilled artisans, our oxford, brushed and piqué cottons epitomise classic Italian workmanship.</h3><p><img src="{{ "brushed-left.jpg" | asset_url }}"></p>
+</div>
+<div class="extra__right grid__item medium-up--one-third">
+  <div class="product_extra__inner">
+    <p><span class="firstletter">W</span>e partner with the oldest Italian mills who have an artisanal approach to crafting cotton and carry out each step of the production in their territory, from Novara to Treviso. Decades of experience combined under the roof of their mills, situated in Northern Italy. </p>
+    <p><img src="{{ "brushed-right.jpg" | asset_url }}"></p><p>We use a variety of luxury fabrics for our shirts and polos. Silky brushed cotton from Grandi & Rubinelli for our winter and mid-seasons shirts, a cloth brushed on the face side to create a uniquely soft texture which naturally captures heat without losing any of its breathable qualities. Our oxford shirts are instead crafted from ‘doppio ritorto’ cotton which is elegant, strong and wrinkle resistant. The secret to the casual appeal of our elegant polo shirts is no less refined. Handcrafted in Bergamo, they are made exclusively from a soft and breathable cotton pique' which lends itself to everyday wear.</p>
+  </div>
+</div>
+
+{% elsif collectionType contains "extra Cotton Pique" or collectionType contains "extra Brera" %}
+
+
+<div class="extra__left grid__item medium-up--two-thirds">
+  <h3>Crafted by skilled artisans, our oxford, brushed and piqué cottons epitomise classic Italian workmanship.</h3><p><img src="{{ "brera-left.jpg" | asset_url }}"></p>
+</div>
+<div class="extra__right grid__item medium-up--one-third">
+  <div class="product_extra__inner">
+    <p><span class="firstletter">W</span>e partner with the oldest Italian mills who have an artisanal approach to crafting cotton and carry out each step of the production in their territory, from Novara to Treviso. Decades of experience combined under the roof of their mills, situated in Northern Italy.</p><p><img src="{{ "brera-right.jpg" | asset_url }}"></p><p>We use a variety of luxury fabrics for our shirts and polos. Silky brushed cotton from Grandi & Rubinelli for our winter and mid-seasons shirts, a cloth brushed on the face side to create a uniquely soft texture which naturally captures heat without losing any of its breathable qualities. Our oxford shirts are instead crafted from ‘doppio ritorto’ cotton which is elegant, strong and wrinkle resistant. The secret to the casual appeal of our elegant polo shirts is no less refined. Handcrafted in Bergamo, they are made exclusively from a soft and breathable cotton pique' which lends itself to everyday wear.</p>
+  </div>
+</div>
+
+{% elsif collectionType contains "extra Leather" %}
+
+
+<div class="extra__left grid__item medium-up--two-thirds">
+  <h3>Sourced from Santa Croce in Italy, our full grain leather is among the finest in the world.</h3><p><img src="{{ "leather-left.jpg" | asset_url }}"></p>
+</div>
+<div class="extra__right grid__item medium-up--one-third">
+  <div class="product_extra__inner">
+    <p><span class="firstletter">H</span>ome to time-honoured winemakers, goldsmiths and leather craftsmen, the ancient Santa Croce quarter of Florence is a fount of true artisanal skill. The obvious destination from which to source our leather, the selected specialist tanneries we partner with uphold centuries-old techniques. Accomplished craftspeople apply mastery and finesse passed down through generations in order to produce Italian leather which is both durable and unique.</p><p><img src="{{ "leather-right.jpg" | asset_url }}"></p><p>By using only the finest full grain leather from Santa Croce sull’Arno, we embrace the very natural grain and lines that exude quality. This dedication to the authenticity of the hide is also reflected in the traditional vegetable tanning technique. Not only is it the most environmentally-friendly choice - eliminating the need for harmful and abrasive chemicals - but it also further preserves leather’s natural characteristics. The result is fully resistant leather which develops a beautiful patina the more you use it.</p>
+  </div>
+</div>
+
+{% elsif collectionType contains "extra Linen" %}
+
+
+<div class="extra__left grid__item medium-up--two-thirds">
+  <h3>WE ONLY USE 100% PURE LINEN FROM THE OLDEST ITALIAN MILLS, TO ENSURE SOFTNESS AND DURABILITY.</h3><p><img src="{{ "imgpshfullsizeanim-1554751528146.jpeg" | asset_url }}"></p>
+</div>
+<div class="extra__right grid__item medium-up--one-third">
+  <div class="product_extra__inner">
+    <p><span class="firstletter">S</span>killed artisans man our family-run mills in Northern Italy, calling upon generations of experience to weave exceptional linen fabric. Great quality linen is the perfect material for warm climates, due to its softness, breathability, and very high moisture absorbency rate. It is also one of the most resistant cloths.</p><p><img src="{{ "1554670543571.4113e65dad4d428cee378f1a9ff3d76f" | asset_url }}"></p><p>Due to its unique properties, linen can be quite stiff to the touch at the beginning, and therefore discerning its quality before a few washes and wears can be difficult. However, it will not take long to see the difference. Good quality linen will become softer and silkier over time and will not lose its shape.</p>
+  </div>
+</div>
+      
+{% endif %}
+
+    </div>
+  </div>
+
